@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veripark.PenaltyCalculation.MvcUI", "Veripark.PenaltyCalculation.MvcUI\Veripark.PenaltyCalculation.MvcUI.csproj", "{FDD6D75F-5336-4886-B192-41E4BE45AAFC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDD6D75F-5336-4886-B192-41E4BE45AAFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDD6D75F-5336-4886-B192-41E4BE45AAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDD6D75F-5336-4886-B192-41E4BE45AAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDD6D75F-5336-4886-B192-41E4BE45AAFC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0237B7E3-9526-4932-AE69-0170FAB3FCC0}
+	EndGlobalSection
+EndGlobal
