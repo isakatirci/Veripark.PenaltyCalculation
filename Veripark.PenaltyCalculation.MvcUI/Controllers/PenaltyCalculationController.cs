@@ -149,5 +149,62 @@ namespace Veripark.PenaltyCalculation.MvcUI.Controllers
         }
 
 
+        public ActionResult Test()
+        {
+            return View(new MyClass());
+        }
+
+
+
+        [HttpPost]
+        public ActionResult Test([ModelBinder(typeof(MyBinder))] MyClass model)
+        {
+
+            return View(new MyClass());
+        }
+
+
+    }
+    public class MyBinder : IModelBinder
+    {
+        private int @int(string a)
+        {
+            try
+            {
+                return int.Parse(a);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }         
+        }
+        private DateTime @datetime(string a)
+        {
+            try
+            {
+                return DateTime.ParseExact(a, "dd/MM/yyyy", null);
+            }
+            catch (Exception)
+            {
+                return default(DateTime);
+            }
+        }
+        public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        {
+            return new MyClass
+            {
+                MyProperty1 = @int(controllerContext.HttpContext.Request.Form["MyProperty1"]),
+                MyProperty2 = @datetime(controllerContext.HttpContext.Request.Form["MyProperty2"])
+
+            };
+        }
+    }
+
+
+    public class MyClass
+    {
+        public int MyProperty1 { get; set; }
+        public DateTime MyProperty2 { get; set; }
     }
 }
+
