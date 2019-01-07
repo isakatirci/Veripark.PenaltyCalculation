@@ -191,6 +191,8 @@ namespace Veripark.PenaltyCalculation.MvcUI.Controllers
         }
         public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
+
+            var temp = (MyClass)bindingContext.Model ?? new MyClass();
             return new MyClass
             {
                 MyProperty1 = @int(controllerContext.HttpContext.Request.Form["MyProperty1"]),
@@ -200,8 +202,41 @@ namespace Veripark.PenaltyCalculation.MvcUI.Controllers
         }
     }
 
+    public class AddressSummary
+    {
+        public string City { get; internal set; }
+        public string Country { get; internal set; }
+    }
 
-    public class MyClass
+    public class AddressSummaryBinder : IModelBinder
+    {
+        public object BindModel(ControllerContext controllerContext,
+        ModelBindingContext bindingContext)
+        {
+            AddressSummary model = (AddressSummary)bindingContext.Model
+            ?? new AddressSummary();
+            model.City = GetValue(bindingContext, "City");
+            model.Country = GetValue(bindingContext, "Country");
+            return model;
+        }
+        private string GetValue(ModelBindingContext context, string name)
+        {
+            name = (context.ModelName == "" ? "" : context.ModelName + ".") + name;
+            ValueProviderResult result = context.ValueProvider.GetValue(name);
+            if (result == null || result.AttemptedValue == "")
+            {
+                return "<Not Specified>";
+            }
+            else
+            {
+                return (string)result.AttemptedValue;
+            }
+        }
+    }
+
+
+
+public class MyClass
     {
         public int MyProperty1 { get; set; }
         public DateTime MyProperty2 { get; set; }
