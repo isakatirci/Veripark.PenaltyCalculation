@@ -45,10 +45,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -127,12 +136,62 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PenaltyCalculationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Country.cs">
+      <DependentUpon>PenaltyCalculationDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CountryConfiguration.cs">
+      <DependentUpon>PenaltyCalculationDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Currency.cs">
+      <DependentUpon>PenaltyCalculationDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CurrencyConfiguration.cs">
+      <DependentUpon>PenaltyCalculationDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Holiday.cs">
+      <DependentUpon>PenaltyCalculationDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HolidayConfiguration.cs">
+      <DependentUpon>PenaltyCalculationDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IPenaltyCalculationDbContext.cs">
+      <DependentUpon>PenaltyCalculationDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Penalize.cs">
+      <DependentUpon>PenaltyCalculationDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PenalizeConfiguration.cs">
+      <DependentUpon>PenaltyCalculationDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PenaltyCalculationDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PenaltyCalculationDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PenaltyCalculationDbContext.cs">
+      <DependentUpon>PenaltyCalculationDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PenaltyCalculationDbContextFactory.cs">
+      <DependentUpon>PenaltyCalculationDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModels\MyJsonResult.cs" />
+    <Compile Include="Models\ViewModels\PenaltyCalculationVM.cs" />
+    <Compile Include="Models\Weekend.cs">
+      <DependentUpon>PenaltyCalculationDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WeekendConfiguration.cs">
+      <DependentUpon>PenaltyCalculationDb.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-sweetalert\sweetalert.css" />
+    <Content Include="Content\bootstrap-sweetalert\sweetalert.js" />
+    <Content Include="Content\bootstrap-sweetalert\sweetalert.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -141,9 +200,35 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\PenaltyCalculationDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PenaltyCalculationDb.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Models\EF.Reverse.POCO.Core.ttinclude" />
+    <Content Include="Models\EF.Reverse.POCO.ttinclude" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\inputmask\bindings\inputmask.binding.js" />
+    <Content Include="Scripts\inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.js" />
+    <Content Include="Scripts\inputmask\dependencyLibs\inputmask.dependencyLib.jquery.js" />
+    <Content Include="Scripts\inputmask\dependencyLibs\inputmask.dependencyLib.js" />
+    <Content Include="Scripts\inputmask\global\window.js" />
+    <Content Include="Scripts\inputmask\inputmask.date.extensions.js" />
+    <Content Include="Scripts\inputmask\inputmask.extensions.js" />
+    <Content Include="Scripts\inputmask\inputmask.js" />
+    <Content Include="Scripts\inputmask\inputmask.numeric.extensions.js" />
+    <Content Include="Scripts\inputmask\jquery.inputmask.js" />
+    <Content Include="Scripts\inputmask\min\bindings\inputmask.binding.min.js" />
+    <Content Include="Scripts\inputmask\min\dependencyLibs\inputmask.dependencyLib.jqlite.min.js" />
+    <Content Include="Scripts\inputmask\min\dependencyLibs\inputmask.dependencyLib.jquery.min.js" />
+    <Content Include="Scripts\inputmask\min\dependencyLibs\inputmask.dependencyLib.min.js" />
+    <Content Include="Scripts\inputmask\min\global\window.min.js" />
+    <Content Include="Scripts\inputmask\min\inputmask.date.extensions.min.js" />
+    <Content Include="Scripts\inputmask\min\inputmask.extensions.min.js" />
+    <Content Include="Scripts\inputmask\min\inputmask.min.js" />
+    <Content Include="Scripts\inputmask\min\inputmask.numeric.extensions.min.js" />
+    <Content Include="Scripts\inputmask\min\jquery.inputmask.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -154,7 +239,19 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Scripts\myinputmask\jquery-inputmask\inputmask\inputmask.date.extensions.min.js" />
+    <Content Include="Scripts\myinputmask\jquery-inputmask\inputmask\inputmask.dependencyLib.min.js" />
+    <Content Include="Scripts\myinputmask\jquery-inputmask\inputmask\inputmask.extensions.min.js" />
+    <Content Include="Scripts\myinputmask\jquery-inputmask\inputmask\inputmask.loader.min.js" />
+    <Content Include="Scripts\myinputmask\jquery-inputmask\inputmask\inputmask.min.js" />
+    <Content Include="Scripts\myinputmask\jquery-inputmask\inputmask\inputmask.numeric.extensions.min.js" />
+    <Content Include="Scripts\myinputmask\jquery-inputmask\inputmask\inputmask.phone.extensions.min.js" />
+    <Content Include="Scripts\myinputmask\jquery-inputmask\inputmask\inputmask.regex.extensions.min.js" />
+    <Content Include="Scripts\myinputmask\jquery-inputmask\inputmask\jquery.inputmask.min.js" />
+    <Content Include="Scripts\myinputmask\jquery-inputmask\jquery.inputmask.bundle.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -168,10 +265,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\PenaltyCalculation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -185,6 +282,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

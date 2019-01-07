@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -28,6 +29,13 @@
         </div>
     </div>
     <div class="container body-content">
+        <br />
+        @if (ViewData["Failure"] != null)
+        {
+            <div class="alert alert-danger">
+                <strong>Danger!</strong>@ViewData["Failure"]
+            </div>
+        }
         @RenderBody()
         <hr />
         <footer>
@@ -38,5 +46,13 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Content/bootstrap-sweetalert/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".mask_date2").inputmask("d/m/y", {
+                "placeholder": "dd/mm/yyyy"
+            }); //multi-char placeholder
+        });
+    </script>
 </body>
 </html>
